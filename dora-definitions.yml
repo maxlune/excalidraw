@@ -1,0 +1,29 @@
+application: excalidraw
+
+deploiement:
+  compte_comme_deploiement: "un déploiement dont l'environment commence par Production, pour l'app excalidraw elle-même, pas pour les exemples"
+  exclut: ["les environnements Preview", "les déploiements des projets d'exemple du monorepo"]
+  horodatage: "le passage au statut success, pas la création du déploiement (qui peut échouer ou rester en pending)"
+
+changement:
+  point_de_depart: "la committer date sur la branche par défaut, pas l'ouverture de la PR"
+
+incident:
+  definition: "un proxy, pas la vraie métrique DORA, on n'exploite pas la production d'excalidraw donc pas d'astreinte ni de monitoring réel"
+  source: "les issues avec le label bug, faute de mieux"
+  debut: "l'ouverture de l'issue, on n'a pas de vraie détection"
+  fin: "la fermeture de l'issue"
+  rattachement_deploiement: "aucun moyen fiable avec les données publiques, c'est le maillon faible vu en phase 1"
+
+rework:
+  marqueur: "préfixe de branche hotfix/, faute de mieux dans l'API publique"
+
+fenetre_de_reference: "90 jours glissants"
+agregation: "médiane pour la tendance générale, P90 en plus pour voir les cas qui traînent, jamais de moyenne"
+
+revision_envisagee: |
+  Le label bug ne marche pas comme proxy d'incident, il n'est presque plus
+  utilisé sur les issues récentes. Si c'était à refaire, on choisirait un 
+  label encore actif aujourd'hui, ou on irait demander directement aux 
+  mainteneurs comment ils tracent leurs bugs avant de fixer la source 
+  dans le contrat.
