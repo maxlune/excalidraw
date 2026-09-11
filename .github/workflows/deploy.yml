@@ -19,10 +19,11 @@ jobs:
         uses: actions/github-script@v9
         with:
           script: |
+            const branch = context.ref.replace('refs/heads/', '');
             const deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: context.sha,
+              ref: branch,
               environment: 'production',
               required_contexts: [],
               auto_merge: false,
